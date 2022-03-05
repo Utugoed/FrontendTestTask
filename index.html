@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div class="main" id="app">
+
+        <form class="input_data">
+            <h3 class="inside">
+                Чтобы узнать нужное для перегородки количество пазогребневых плит:
+            </h3>
+            <div class="inside">
+                <p>
+                    Введите общую длину стены-перегородки в метрах погонных:
+                    <input type="number" v-model="wall_length">
+                    м.
+                </p>
+                <p>
+                    Введите ее высоту в метрах:
+                    <input type="number" v-model="wall_height">
+                    м.
+                </p>
+            </div>
+        </form>
+
+        <form class="input_data" onsubmit="return false">
+            <h3 class="inside">
+                Проёмы (для дверей или других целей):
+            </h3>
+            <ul class="inside">
+                <li class="inside" v-for="hole in holes">
+                    Ширина: <input type="number" v-model="hole.width"> см.
+                    Высота: <input type="number" v-model="hole.height"> см.
+                    <button v-on:click="removeHole(hole)">Убрать проем</button>
+                </li>
+            </ul>
+            <button class="new_hole" v-on:click="newHole()">Новый проем</button>
+        </form>
+
+        <form class="input_data">
+            <h3 class="inside">
+                Выберите, какие плиты использовать:
+            </h3>
+            <div class="radio">
+                <input v-model="block_type" type="radio" value="empty">
+                <label for="empty">Пустотные</label>
+                <input v-model="block_type" type="radio" value="full">
+                <label for="full">Полнотелые</label>
+            </div>
+        </form>
+
+        <form class="input_data">
+            <h3 class="inside">
+                Скорректировать стоимость материалов и работ:
+            </h3>
+            <div class="inside">
+                <p>
+                    Стоимость одного блока:
+                    <input type="number" v-model="block_cost">
+                    руб.
+                </p>
+                <p>
+                    Стоимость кладки одного блока:
+                    <input type="number" v-model="work_cost">
+                    руб.
+                </p>
+            </div>
+        </form>
+
+        <button class="count" v-on:click="count">Считать</button>
+
+        <form class="output_data" id="answer" hidden="true">
+            <div class="output_data">
+                <p>На данную перегородку потребуется:</p>
+                <p>
+                    Пазогребневых гипсовых блоков: {{ blocks_number }}шт. 
+                    общей стоимостью {{ blocks_cost }}
+                </p>
+                <p>
+                    Клея для блоков: {{ glue_mass }}кг. ({{ glue_packs_number }} мешка)
+                </p>
+                <p>
+                    Стоимость работы по кладке: {{ whole_work_cost }}руб.
+                </p>
+                <p>
+                    Вес всех плит составит: {{ whole_weight }}кг.
+                </p>
+                <p>
+                    Нагрузка на метр погонный: {{ load }}кг./м.п.
+                </p>
+            </div>
+        </form>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
