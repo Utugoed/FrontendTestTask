@@ -34,10 +34,10 @@
                 Проёмы (для дверей или других целей):
             </h3>
             <ul class="inside">
-                <li class="inside" v-for="hole in holes">
+                <li class="inside" v-for="(hole, index) in holes">
                     Ширина: <input type="number" v-model="hole.width"> см.
                     Высота: <input type="number" v-model="hole.height"> см.
-                    <button v-on:click="removeHole(hole)">Убрать проем</button>
+                    <button v-on:click="holes.splice(index, 1)">Убрать проем</button>
                 </li>
             </ul>
             <button class="new_hole" v-on:click="newHole()">Новый проем</button>
@@ -79,7 +79,7 @@
             <div class="output_data">
                 <p>На данную перегородку потребуется:</p>
                 <p>
-                    Пазогребневых гипсовых блоков: {{ blocks_number }}шт. 
+                    Пазогребневых гипсовых блоков: {{ blocks_number }}шт.
                     общей стоимостью {{ blocks_cost }}
                 </p>
                 <p>

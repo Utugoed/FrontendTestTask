@@ -28,10 +28,6 @@ var app = new Vue({
                 "height": 205
             })
         },
-        removeHole(hole) {
-            console.log(hole)
-            app.holes.pop(hole)
-        },
         count() {
             var square
             square = app.wall_height*app.wall_length
@@ -50,5 +46,5 @@ var app = new Vue({
             document.getElementById('answer').hidden = false;
         }
     }
-    
+
 })
